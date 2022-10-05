@@ -11,7 +11,7 @@ export default function Table(props) {
           <p className="mt-2 text-sm text-gray-700">{props.subtitle}</p>
         </div>
         <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-          <button
+          <button 
             type="button"
             className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
           >
@@ -34,7 +34,7 @@ export default function Table(props) {
                         "sticky top-0 z-10 border-b border-gray-300 bg-gray-50 bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8";
 
                       return (
-                        <th scope="col" className={css}>
+                        <th scope="col" className={css} key={index}>
                           {value}
                         </th>
                       );
@@ -43,9 +43,10 @@ export default function Table(props) {
                 </thead>
                 <tbody className="bg-white">
                   {props.data.map((datum, datumIdx) => (
-                    <tr>
-                      {props.schema.map((val) => (
+                    <tr key={datumIdx}>
+                      {props.schema.map((val, key) => (
                         <td
+                            key = {key}
                           className={classNames(
                             datumIdx !== props.data.length - 1
                               ? "border-b border-gray-200"
@@ -65,14 +66,13 @@ export default function Table(props) {
                         )}
                       >
                         <button
-                          href="#"
                           className="text-indigo-600 hover:text-indigo-900 mr-2"
                         >
                           Edit<span className="sr-only"></span>
                         </button>
                         <button
-                          href="#"
                           className="text-indigo-600 hover:text-indigo-900 ml-2"
+                          onClick={() => {props.onDeleteRow(datum._id)}}
                         >
                           Delete<span className="sr-only"></span>
                         </button>
