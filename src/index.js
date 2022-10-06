@@ -2,7 +2,8 @@ import React from "react";
 import "./index.css";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
+import Register from "./pages/Register"
+import Users from "./pages/Users";
 import NoPage from "./pages/NoPage";
 
 export default function App() {
@@ -10,7 +11,8 @@ export default function App() {
     <BrowserRouter>
       <Routes>
    
-          <Route index element={<Home />}></Route>
+          <Route index element={<Users />}></Route>
+          <Route path="/register" element = {<Register/>}></Route>
         <Route path="*" element={<NoPage />}></Route>
       </Routes>
     </BrowserRouter>
