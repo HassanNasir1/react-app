@@ -1,10 +1,17 @@
+import {useState} from 'react'
+import Delete from './Delete';
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Table(props) {
+    const [id, setId] = useState(null)
+
   return (
+
+    
     <div className="px-4 sm:px-6 lg:px-8">
+      <Delete action={props.onDeleteRow} id={id} setId={setId} />
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
           <h1 className="text-xl font-semibold text-gray-900">Users</h1>
@@ -72,7 +79,7 @@ export default function Table(props) {
                         </button>
                         <button
                           className="text-indigo-600 hover:text-indigo-900 ml-2"
-                          onClick={() => {props.onDeleteRow(datum._id)}}
+                          onClick={() => setId(datum._id)}
                         >
                           Delete<span className="sr-only"></span>
                         </button>
