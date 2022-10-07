@@ -1,7 +1,5 @@
 import Table from "../component/Table";
 import User from "../component/User";
-import Delete from '../component/Delete';
-import Course from '../component/Course';
 import QuestionAttempt from '../component/QuestionAttempt';
 import { useState, useEffect } from "react";
 import { deleteUser, getAllUsers } from "../api/user";
@@ -42,9 +40,9 @@ const Users = () => {
         data={users}
         schema={schema}
         onDeleteRow={onDeleteRow}
+        name={"Users"}
       />
       <User />
-      <Course />
       <QuestionAttempt />
 
     </>
