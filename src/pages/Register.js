@@ -8,6 +8,15 @@ export default function Register() {
   const [err, setErr] = useState("");
   const [userType, setUserType] = useState("");
 
+  
+  const onRegister = response => {
+      setName("");
+      setEmail("");
+      setPassword("");
+      setUserType("");
+
+  }
+
   return (
     <>
       {/*
@@ -136,10 +145,11 @@ export default function Register() {
                 {err && <p className="mb-5  text-sm  text-red-900">{err}</p>}
                 <button
                   type="submit"
-                  onClick={(e) =>{ 
+                  onClick={async (e) =>{ 
                     e.preventDefault();
                     setErr("")
-                    registerUser(name, setName,  email, setEmail, password , setPassword, userType, setUserType, setErr)}}
+                    registerUser(name, email, password, userType).then(onRegister).catch(setErr)}}
+                    
                   className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                   Sign Up
