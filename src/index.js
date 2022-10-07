@@ -5,6 +5,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Register from "./pages/Register"
 import Users from "./pages/Users";
 import NoPage from "./pages/NoPage";
+import Courses from './pages/Course'
+import Quiz from './pages/Quiz'
 
 export default function App() {
   return (
@@ -13,6 +15,8 @@ export default function App() {
    
           <Route index element={<Users />}></Route>
           <Route path="/register" element = {<Register/>}></Route>
+          <Route path="/course" element = {<Courses/>}></Route>
+          <Route path="/quiz" element = {<Quiz/>}></Route>
         <Route path="*" element={<NoPage />}></Route>
       </Routes>
     </BrowserRouter>
