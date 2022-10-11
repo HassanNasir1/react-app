@@ -1,3 +1,4 @@
+import Footer from "../component/Footer";
 export default function NoPage() {
     return (
       <>
@@ -35,22 +36,8 @@ export default function NoPage() {
               </div>
             </div>
           </main>
-          <footer className="mx-auto w-full max-w-7xl flex-shrink-0 px-4 sm:px-6 lg:px-8">
-            <nav className="flex justify-center space-x-4">
-              <a href="#" className="text-sm font-medium text-gray-500 hover:text-gray-600">
-                Contact Support
-              </a>
-              <span className="inline-block border-l border-gray-300" aria-hidden="true" />
-              <a href="#" className="text-sm font-medium text-gray-500 hover:text-gray-600">
-                Status
-              </a>
-              <span className="inline-block border-l border-gray-300" aria-hidden="true" />
-              <a href="#" className="text-sm font-medium text-gray-500 hover:text-gray-600">
-                Twitter
-              </a>
-            </nav>
-          </footer>
         </div>
+        <Footer />
       </>
     )
   }
