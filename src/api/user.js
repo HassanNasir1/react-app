@@ -36,6 +36,25 @@ export function registerUser(name, email, password, userType) {
     });
 }
 
+export function signInUser(email, password) {
+  const data = {
+  
+    email: email,
+    password: password,
+  
+  };
+  return axios.post("/login", data)
+    .then((response) => {
+        console.log(response);
+        
+     return response;
+    })
+    .catch((error) => {
+    
+        return Promise.reject(error.response.data.error || error.response.data.message);
+    });
+}
+
 export function deleteUser(id) {
   return axios
     .delete(`/user/${id}`)
