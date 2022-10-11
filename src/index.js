@@ -7,6 +7,8 @@ import Users from "./pages/Users";
 import NoPage from "./pages/NoPage";
 import Courses from './pages/Course'
 import Quiz from './pages/Quiz'
+import Login from "./pages/Login"
+import RegisterCourse from "./pages/RegisterCourse"
 
 export default function App() {
   return (
@@ -15,8 +17,10 @@ export default function App() {
    
           <Route index element={<Users />}></Route>
           <Route path="/register" element = {<Register/>}></Route>
+          <Route path="/login" element = {<Login/>}></Route>
           <Route path="/course" element = {<Courses/>}></Route>
           <Route path="/quiz" element = {<Quiz/>}></Route>
+          <Route path="/course/register" element = {<RegisterCourse/>}></Route>
         <Route path="*" element={<NoPage />}></Route>
       </Routes>
     </BrowserRouter>
