@@ -2,12 +2,13 @@ import Table from "../component/Table";
 import User from "../component/User";
 import QuestionAttempt from "../component/QuestionAttempt";
 import { useState, useEffect } from "react";
-import { deleteUser, getAllUsers } from "../api/user";
+import { deleteUser, getAllUsers, updateUser } from "../api/user";
 import { remove, getAll } from "../api/course";
 import Header from "../component/Header";
 import Footer from "../component/Footer";
 
 const Users = () => {
+  const [user, setUser] = useState({});
   const [users, setUsers] = useState([]);
   const [course, setCourse] = useState([]);
 
@@ -26,6 +27,23 @@ const Users = () => {
         return false;
       });
   }
+
+  
+  function onUpdateRow(id, userName, email, userType){
+    return updateUser(id, userName, email, userType)
+      .then((response) => {
+        setUser(response);
+        getAllUsers()
+        console.log('i am  here ')
+        //return user;
+        window.location.reload();
+        })
+      .catch((err) => {
+
+        return Promise.reject(err);
+      });
+  }
+  
 
   useEffect(() => {
     getAllUsers()
@@ -52,7 +70,7 @@ const Users = () => {
         });
     }, []);
 
-    function onDeleteRow(id) {
+    function onDeleteCourseRow(id) {
       return remove(id)
         .then((response) => {
           const newCourses = course.filter((course) => {
@@ -91,6 +109,7 @@ const Users = () => {
         data={users}
         schema={schema}
         onDeleteRow={onDeleteRow}
+        onUpdateRow={onUpdateRow}
         name={"Users"}
         visibility="invisible"
       />
@@ -98,13 +117,13 @@ const Users = () => {
         headings={courseHeadings}
         data={course}
         schema={courseSchema}
-        onDeleteRow={onDeleteRow}
+        onDeleteRow={onDeleteCourseRow}
         name={"Courses"}
         visibility="invisible"
         
       />
-      <User />
-      <QuestionAttempt />
+      {/* <User />
+      <QuestionAttempt /> */}
       <Footer/>
     </>
   );
