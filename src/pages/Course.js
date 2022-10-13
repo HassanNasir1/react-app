@@ -1,6 +1,6 @@
 import Table from "../component/Table";
 import { useState, useEffect } from "react";
-import { remove, getAll } from "../api/course";
+import { remove, getAll, updateCourse } from "../api/course";
 import Course from "../component/Course";
 import Header from "../component/Header";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +11,10 @@ import Navbar from "../component/Navbar";
 
 
 const Courses = () => {
+
+const [courseName, setCourseName] = useState("");
+const [courseCode, setCourseCode] = useState("");
+const [courseType, setCourseType] = useState("");
 
   const navigate = useNavigate();
   const navigateToRegister = () => {
@@ -33,6 +37,24 @@ const Courses = () => {
       });
   }
 
+  function onUpdateRow(id, courseName, courseCode, courseType){
+    return updateCourse(id, courseName, courseCode, courseType)
+      .then((response) => {
+        getAll().then((response) => {
+          setCourse(response);
+        });
+        //setCourse(response);
+        //getAllUsers()
+        // console.log('i am  here ')
+        //return user;
+        //window.location.reload();
+        })
+      .catch((err) => {
+
+        return Promise.reject(err);
+      });
+  }
+
   useEffect(() => {
     getAll()
       .then((response) => {
@@ -49,6 +71,8 @@ const Courses = () => {
 
   const schema = ["courseName", "courseCode", "courseType"];
 
+  const courseOptions = ["programming", "sports", "science"];
+
   const navigation = [
     { name: 'Login', href: '/', current: false },
     { name: 'Register', href: '/register', current: false },
@@ -57,6 +81,8 @@ const Courses = () => {
     { name: 'Register Course', href: '/course/register', current: false },
     { name: 'Quiz', href: '/quiz', current: false },
   ]
+
+
 
   return (
     <>
@@ -72,8 +98,16 @@ const Courses = () => {
         data={course}
         schema={schema}
         onDeleteRow={onDeleteRow}
-        name={"Courses"}
+        onUpdateRow={onUpdateRow}
+        name={courseName}
+        setName={setCourseName}
+        type={courseType}
+        setType={setCourseType}
+        arg={courseCode}
+        setArg={setCourseCode}
+        heading={"Courses"}
         navigateToRegister={navigateToRegister}
+        options={courseOptions}
       />
       
       <QuizCreator />  
