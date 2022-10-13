@@ -5,6 +5,7 @@ import { getImages } from "../api/unsplash";
 import Header from "../component/Header";
 import Footer from "../component/Footer";
 import Card from "../component/Card";
+import Navbar from "../component/Navbar";
 
 const Quiz = () => {
   const [course, setCourse] = useState([]);
@@ -61,9 +62,18 @@ const Quiz = () => {
   //   const headings = ["Course Name", "Course Code", "Course Type", "Action"];
 
   //const schema = ["courseName", "courseCode", "courseType"];
+  const navigation = [
+    { name: 'Login', href: '/', current: false },
+    { name: 'Register', href: '/register', current: false },
+    { name: 'Admin', href: '/admin', current: false },
+    { name: 'Course', href: '/course', current: false },
+    { name: 'Register Course', href: '/course/register', current: false },
+    { name: 'Quiz', href: '/quiz', current: true },
+  ]
 
   return (
     <>
+    <Navbar navigation = {navigation}/>
       {/* <Table
         headings={headings}
         data={course}
@@ -71,6 +81,7 @@ const Quiz = () => {
         onDeleteRow={onDeleteRow}
         name={"Courses"}
       /> */}
+      
       <Header
         heading={"Welcome to Student Panel"}
         tagline={

@@ -1,22 +1,34 @@
 import { useState } from "react";
 import { signInUser } from "../api/user";
+import Navbar from "../component/Navbar";
 export default function Register() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [err, setErr] = useState("");
- 
+  const [jwt, setJwt] = useState("");
 
   
-  const onSigningIn = response => {
+  const onSigningIn = (response) => {
 
       setEmail("");
       setPassword("");
+      setJwt(response.token)
 
   }
+  //console.log(jwt);
+  const navigation = [
+    { name: 'Login', href: '/', current: true },
+    { name: 'Register', href: '/register', current: false },
+    { name: 'Admin', href: '/admin', current: false },
+    { name: 'Course', href: '/course', current: false },
+    { name: 'Register Course', href: '/course/register', current: false },
+    { name: 'Quiz', href: '/quiz', current: false },
+  ]
 
   return (
     <>
+   <Navbar navigation = {navigation} />
       {/*
           This example requires updating your template:
   

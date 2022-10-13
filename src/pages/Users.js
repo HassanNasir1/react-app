@@ -6,6 +6,7 @@ import { deleteUser, getAllUsers, updateUser } from "../api/user";
 import { remove, getAll } from "../api/course";
 import Header from "../component/Header";
 import Footer from "../component/Footer";
+import Navbar from "../component/Navbar";
 
 const Users = () => {
   const [user, setUser] = useState({});
@@ -94,10 +95,20 @@ const Users = () => {
 
   const schema = ["name", "email", "userType"];
 
+  const navigation = [
+    { name: 'Login', href: '/', current: false },
+    { name: 'Register', href: '/register', current: false },
+    { name: 'Admin', href: '/admin', current: true },
+    { name: 'Course', href: '/course', current: false },
+    { name: 'Register Course', href: '/course/register', current: false },
+    { name: 'Quiz', href: '/quiz', current: false },
+  ]
+
   
 
   return (
     <>
+    <Navbar navigation = {navigation}/>
       <Header
         heading={"Welcome to Administrator Panel"}
         tagline={

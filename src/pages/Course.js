@@ -6,6 +6,7 @@ import Header from "../component/Header";
 import { useNavigate } from "react-router-dom";
 import Footer from "../component/Footer";
 import QuizCreator from "../component/QuizCreator";
+import Navbar from "../component/Navbar";
 
 
 
@@ -48,8 +49,18 @@ const Courses = () => {
 
   const schema = ["courseName", "courseCode", "courseType"];
 
+  const navigation = [
+    { name: 'Login', href: '/', current: false },
+    { name: 'Register', href: '/register', current: false },
+    { name: 'Admin', href: '/admin', current: false },
+    { name: 'Course', href: '/course', current: true },
+    { name: 'Register Course', href: '/course/register', current: false },
+    { name: 'Quiz', href: '/quiz', current: false },
+  ]
+
   return (
     <>
+    <Navbar navigation = {navigation} />
       <Header
         heading={"Welcome to Teachers panel"}
         tagline={
