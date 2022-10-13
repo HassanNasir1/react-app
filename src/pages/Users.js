@@ -3,7 +3,7 @@ import User from "../component/User";
 import QuestionAttempt from "../component/QuestionAttempt";
 import { useState, useEffect } from "react";
 import { deleteUser, getAllUsers, updateUser } from "../api/user";
-import { remove, getAll } from "../api/course";
+import { remove, getAll, updateCourse } from "../api/course";
 import Header from "../component/Header";
 import Footer from "../component/Footer";
 import Navbar from "../component/Navbar";
@@ -13,6 +13,13 @@ const Users = () => {
   const [users, setUsers] = useState([]);
   const [course, setCourse] = useState([]);
 
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [userType, setUserType] = useState("");
+
+  const [courseName, setCourseName] = useState("");
+  const [courseCode, setCourseCode] = useState("");
+  const [courseType, setCourseType] = useState("");
 
 
   function onDeleteRow(id) {
@@ -34,7 +41,9 @@ const Users = () => {
     return updateUser(id, userName, email, userType)
       .then((response) => {
         setUser(response);
-        getAllUsers()
+        getAllUsers().then((response) => {
+          setUsers(response);
+        })
         console.log('i am  here ')
         //return user;
         window.location.reload();
@@ -58,6 +67,7 @@ const Users = () => {
   }, []);
 
   //Code taken from course file to show Courses Table
+  
 
     useEffect(() => {
       getAll()
@@ -85,6 +95,23 @@ const Users = () => {
         });
     }
 
+    function onUpdateCourseRow(id, courseName, courseCode, courseType){
+      return updateCourse(id, courseName, courseCode, courseType)
+        .then((response) => {
+          //setCourse(response);
+          getAll().then((response) => {
+            setCourse(response);
+          });
+          // console.log('i am  here ')
+          //return user;
+          //window.location.reload();
+          })
+        .catch((err) => {
+          console.log('err',err)
+;          return Promise.reject(err);
+        });
+    }
+
   const courseHeadings = ["Course Name", "Course Code", "Course Type", "Action"];
 
   const courseSchema = ["courseName", "courseCode", "courseType"];
@@ -94,6 +121,10 @@ const Users = () => {
   const headings = ["Name", "Email", "Type", "Action"];
 
   const schema = ["name", "email", "userType"];
+
+  const userOptions = ["admin", "student", "teacher"];
+
+  const courseOptions = ["programming", "sports", "science"];
 
   const navigation = [
     { name: 'Login', href: '/', current: false },
@@ -121,16 +152,33 @@ const Users = () => {
         schema={schema}
         onDeleteRow={onDeleteRow}
         onUpdateRow={onUpdateRow}
-        name={"Users"}
+        name={userName}
+        setName={setUserName}
+        type={userType}
+        setType={setUserType}
+        arg={email}
+        setArg={setEmail}
+        options={userOptions}
+        heading={"Users"}
         visibility="invisible"
+
+
       />
         <Table
         headings={courseHeadings}
         data={course}
         schema={courseSchema}
         onDeleteRow={onDeleteCourseRow}
-        name={"Courses"}
+        onUpdateRow={onUpdateCourseRow}
+        name={courseName}
+        setName={setCourseName}
+        type={courseType}
+        setType={setCourseType}
+        arg={courseCode}
+        setArg={setCourseCode}
+        heading={"Courses"}
         visibility="invisible"
+        options={courseOptions}
         
       />
       {/* <User />
