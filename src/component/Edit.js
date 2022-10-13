@@ -5,21 +5,19 @@ import {InformationCircleIcon} from "@heroicons/react/24/outline"
 
 export default function Edit(props) {
 
-  const [userName, setUserName] = useState("");
-  const [email, setEmail] = useState("");
-  const [userType, setUserType] = useState("");
+
+
   const [err, setErr] = useState("");
 
   
-  const onUpdateUser = () => {
+  const onUpdate = () => {
     console.log('I am here')
-    setUserName("");
-    setEmail("");
-    setUserType("");
+    props.setName("");
+    props.setArg("");
+    props.setType("");
     props.setId(null);
     
     //setErr("");
-   
 }
 
 
@@ -92,7 +90,7 @@ export default function Edit(props) {
                                   htmlFor="first-name"
                                   className="block text-sm font-medium text-gray-700"
                                 >
-                                  User Name
+                                  {props.headings[0]}
                                 </label>
                                 <div className="mt-1">
                                   <input
@@ -100,7 +98,7 @@ export default function Edit(props) {
                                     name="user-name"
                                     id="user-name"
                                     onChange={(e) => {
-                                      setUserName(e.target.value);
+                                      props.setName(e.target.value);
                                     }}
                                     autoComplete="given-name"
                                     className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
@@ -113,7 +111,7 @@ export default function Edit(props) {
                                   htmlFor="email"
                                   className="block text-sm font-medium text-gray-700"
                                 >
-                                  Email address
+                                  {props.headings[1]}
                                 </label>
                                 <div className="mt-1">
                                   <input
@@ -121,7 +119,7 @@ export default function Edit(props) {
                                     name="email"
                                     type="email"
                                     onChange={(e) => {
-                                      setEmail(e.target.value);
+                                      props.setArg(e.target.value);
                                     }}
                                     autoComplete="email"
                                     className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
@@ -134,21 +132,24 @@ export default function Edit(props) {
                                   htmlFor="country"
                                   className="block text-sm font-medium text-gray-700"
                                 >
-                                  User Type
+                                  {props.headings[2]}
                                 </label>
                                 <div className="mt-1">
                                   <select
                                     id="user-Type"
                                     onChange={(e) => {
-                                      setUserType(e.target.value);
+                                      props.setType(e.target.value);
                                     }}
                                     name="user-Type"
                                     className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                   >
-                                    <option>Select User Type</option>
-                                    <option>student</option>
-                                    <option>teacher</option>
-                                    <option>admin</option>
+                                  
+                                    <option>{`Select ${props.type}`}</option>
+                                    {props.options.map( (value,index) => (
+                                      <option key={index}>{value}</option>
+                                    ))}
+                                    
+      
                                   </select>
                                 </div>
                               </div>
@@ -166,7 +167,7 @@ export default function Edit(props) {
                     className="inline-flex w-full justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
                    onClick={ () => {
                       
-                       props.action(props.id, userName, email, userType).then(onUpdateUser, setErr("")).catch(setErr);
+                       props.action(props.id, props.name, props.arg, props.type).then(onUpdate, setErr("")).catch(setErr);
                         
                     }}
                     
