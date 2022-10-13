@@ -15,7 +15,7 @@ export default function Question(props) {
           name="question"
           id="question"
           autoComplete="given-name"
-          className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+          className="block w-3/5 h-12 rounded-md border-gray-300 shadow-md focus:border-indigo-500 focus:ring-indigo-500 sm:text-lg"
         />
       </div>
       {props.children}

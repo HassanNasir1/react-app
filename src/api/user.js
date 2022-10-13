@@ -1,5 +1,6 @@
 import axios from "./axios";
 import { useState } from "react";
+import { storeToken } from "../Cache/User";
 // import Userfront from "@userfront/core";
 // Userfront.init("demo1234");
 
@@ -7,33 +8,33 @@ import { useState } from "react";
 
 export function signInUser(email, password) {
   const data = {
-  
     email: email,
     password: password,
-  
   };
-  return axios.post("/login", data)
-    .then(response => {
+  return axios
+    .post("/login", data)
+    .then((response) => {
       const jwt = response.token;
+      storeToken(jwt);
       axios.defaults.headers.common.Authorization = `Bearer ${jwt}`;
       return response;
     })
     .then((response) => {
-        console.log(response);
-        
-     return response;
+      console.log(response);
+
+      return response;
     })
     .catch((error) => {
-    
-        return Promise.reject(error.response.data.error || error.response.data.message);
+      return Promise.reject(
+        error.response.data.error || error.response.data.message
+      );
     });
 }
 
 export function getAllUsers() {
-
-  const token =  localStorage.getItem("token")
+  const token = localStorage.getItem("token");
   return axios
-    .get("/user", { headers: {"authorization" : `Bearer ${token}`} })
+    .get("/user", { headers: { authorization: `Bearer ${token}` } })
     .then(function (response) {
       // handle success
 
@@ -55,18 +56,16 @@ export function registerUser(name, email, password, userType) {
     password: password,
     userType: userType,
   };
-  return axios.post("/register", data)
+  return axios
+    .post("/register", data)
     .then((response) => {
-        console.log(response);
-     return response;
+      console.log(response);
+      return response;
     })
     .catch((error) => {
-    
-        return Promise.reject(error.response.data.error);
+      return Promise.reject(error.response.data.error);
     });
 }
-
-
 
 export function deleteUser(id) {
   return axios
@@ -90,12 +89,12 @@ export function updateUser(id, userName, email, userType) {
     email: email,
     userType: userType,
   };
-  console.log(data)
+  console.log(data);
   return axios
     .put(`/user/${id}`, data)
     .then(function (response) {
-      console.log('res', response);
-      return Promise.resolve(response); 
+      console.log("res", response);
+      return Promise.resolve(response);
       // handle success
     })
     .catch(function (error) {

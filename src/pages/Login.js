@@ -1,34 +1,38 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { signInUser } from "../api/user";
+import { useNavigate, useLocation } from "react-router-dom";
 import Navbar from "../component/Navbar";
+import jwtDecode from "jwt-decode";
+import { User } from "../context/";
 export default function Register() {
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [err, setErr] = useState("");
   const [jwt, setJwt] = useState("");
+  const navigate = useNavigate();
+  const { user, setUser } = useContext(User);
 
-  
+
   const onSigningIn = (response) => {
+    setEmail("");
+    setPassword("");
+    setJwt(response.token);
+    if (response.token) {
+      let decode = jwtDecode(response.token);
+      setUser(decode);
+      decode?.type === "admin"
+        ? navigate("/admin")
+        : decode?.type === "teacher"
+        ? navigate("/course")
+        : navigate("/quiz");
+    }
+    console.log('user','hello')
 
-      setEmail("");
-      setPassword("");
-      setJwt(response.token)
-
-  }
+  };
   //console.log(jwt);
-  const navigation = [
-    { name: 'Login', href: '/', current: true },
-    { name: 'Register', href: '/register', current: false },
-    { name: 'Admin', href: '/admin', current: false },
-    { name: 'Course', href: '/course', current: false },
-    { name: 'Register Course', href: '/course/register', current: false },
-    { name: 'Quiz', href: '/quiz', current: false },
-  ]
 
   return (
     <>
-   <Navbar navigation = {navigation} />
       {/*
           This example requires updating your template:
   
@@ -37,7 +41,7 @@ export default function Register() {
           <body class="h-full">
           ```
         */}
-      
+
       <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
@@ -48,7 +52,6 @@ export default function Register() {
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
             <form className="space-y-6">
-
               <div>
                 <label
                   htmlFor="email"
@@ -91,8 +94,6 @@ export default function Register() {
                 </div>
               </div>
 
-            
-
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
                   <input
@@ -114,11 +115,11 @@ export default function Register() {
                 {err && <p className="mb-5  text-sm  text-red-900">{err}</p>}
                 <button
                   type="submit"
-                  onClick={async (e) =>{ 
+                  onClick={async (e) => {
                     e.preventDefault();
-                    setErr("")
-                    signInUser(email, password).then(onSigningIn).catch(setErr)}}
-                    
+                    setErr("");
+                    signInUser(email, password).then(onSigningIn).catch(setErr);
+                  }}
                   className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                   Sign in
@@ -128,7 +129,6 @@ export default function Register() {
           </div>
         </div>
       </div>
-    
     </>
   );
 }

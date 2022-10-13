@@ -73,3 +73,18 @@ export function updateCourse(id, courseName, courseCode, courseType) {
       // always executed
     });
 }
+
+export function createQuiz(quizDifficulty, questions) {
+  const data = {
+    quizDifficulty: quizDifficulty,
+    questions: questions,
+  };
+  return axios.post("/quiz/", data)
+    .then((response) => {
+        console.log(response);
+     return response;
+    })
+    .catch((error) => {
+        return Promise.reject(error.response.data.message);
+    });
+}

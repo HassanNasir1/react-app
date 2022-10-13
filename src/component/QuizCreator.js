@@ -62,7 +62,7 @@ export default function QuizCreator() {
             <div className="sm:col-span-3">
               <label
                 htmlFor="country"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-lg font-medium text-gray-700"
               >
                 Quiz Difficulty
               </label>
@@ -70,7 +70,7 @@ export default function QuizCreator() {
                 <select
                   id="quiz-Difficulty"
                   name="quiz-Difficulty"
-                  className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  className="block w-1/2 h-12 rounded-md border-gray-300 shadow-md focus:border-indigo-500 focus:ring-indigo-500 sm:text-lg"
                 >
                   <option>Select Difficulty</option>
                   <option>easy</option>
@@ -118,13 +118,13 @@ export default function QuizCreator() {
         <div className="flex justify-end">
           <button
             type="button"
-            className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            className="rounded-md border border-gray-300 bg-white py-2 px-4 text-md font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           >
             Cancel
           </button>
           <button
             type="submit"
-            className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-md font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           >
             Save
           </button>

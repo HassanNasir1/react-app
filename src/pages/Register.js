@@ -18,18 +18,10 @@ export default function Register() {
 
   }
 
-  const navigation = [
-    { name: 'Login', href: '/', current: false },
-    { name: 'Register', href: '/register', current: true },
-    { name: 'Admin', href: '/admin', current: false },
-    { name: 'Course', href: '/course', current: false },
-    { name: 'Register Course', href: '/course/register', current: false },
-    { name: 'Quiz', href: '/quiz', current: false },
-  ]
 
   return (
     <>
-    <Navbar navigation={navigation}/>
+ 
       {/*
           This example requires updating your template:
   

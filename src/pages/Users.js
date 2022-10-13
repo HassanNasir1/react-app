@@ -46,7 +46,7 @@ const Users = () => {
         })
         console.log('i am  here ')
         //return user;
-        window.location.reload();
+        //window.location.reload();
         })
       .catch((err) => {
 
@@ -126,20 +126,11 @@ const Users = () => {
 
   const courseOptions = ["programming", "sports", "science"];
 
-  const navigation = [
-    { name: 'Login', href: '/', current: false },
-    { name: 'Register', href: '/register', current: false },
-    { name: 'Admin', href: '/admin', current: true },
-    { name: 'Course', href: '/course', current: false },
-    { name: 'Register Course', href: '/course/register', current: false },
-    { name: 'Quiz', href: '/quiz', current: false },
-  ]
 
   
 
   return (
     <>
-    <Navbar navigation = {navigation}/>
       <Header
         heading={"Welcome to Administrator Panel"}
         tagline={

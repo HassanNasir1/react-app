@@ -1,6 +1,6 @@
 import Table from "../component/Table";
 import { useState, useEffect } from "react";
-import { remove, getAll, updateCourse } from "../api/course";
+import { remove, getAll, updateCourse, createQuiz } from "../api/course";
 import Course from "../component/Course";
 import Header from "../component/Header";
 import { useNavigate } from "react-router-dom";
@@ -73,20 +73,10 @@ const [courseType, setCourseType] = useState("");
 
   const courseOptions = ["programming", "sports", "science"];
 
-  const navigation = [
-    { name: 'Login', href: '/', current: false },
-    { name: 'Register', href: '/register', current: false },
-    { name: 'Admin', href: '/admin', current: false },
-    { name: 'Course', href: '/course', current: true },
-    { name: 'Register Course', href: '/course/register', current: false },
-    { name: 'Quiz', href: '/quiz', current: false },
-  ]
-
 
 
   return (
     <>
-    <Navbar navigation = {navigation} />
       <Header
         heading={"Welcome to Teachers panel"}
         tagline={
