@@ -5,7 +5,7 @@ const axiosInstance = axios.create({
     headers: {'X-Custom-Header': 'foobar'}
   });
   axiosInstance.interceptors.response.use(function (response) {
-    console.log(response)
+    console.log('response',response)
     return response.data;
 
     
