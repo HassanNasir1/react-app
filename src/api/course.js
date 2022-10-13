@@ -49,3 +49,27 @@ export function remove(id) {
       // always executed
     });
 }
+
+export function updateCourse(id, courseName, courseCode, courseType) {
+  const data = {
+    courseName: courseName,
+    courseCode: courseCode,
+    courseType: courseType,
+  };
+  console.log('data', data)
+  return axios
+    .put(`/course/${id}`, data)
+    .then(function (response) {
+      console.log('res', response);
+      return Promise.resolve(response); 
+      // handle success
+    })
+    .catch(function (error) {
+      // handle error
+      console.log('error',error);
+      return Promise.reject(error.response.data);
+    })
+    .finally(function () {
+      // always executed
+    });
+}
