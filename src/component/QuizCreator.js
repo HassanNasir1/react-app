@@ -43,7 +43,10 @@ export default function QuizCreator() {
   };
 
   return (
-    <form className="space-y-8 divide-y divide-gray-200 m-2 p-4">
+    
+    <form className="space-y-8 divide-y divide-gray-200 m-2 p-4 ">
+      <div className="space-y-8 divide-y divide-gray-200"></div>
+      <h1 className="text-4xl font-bold leading-8 text-gray-900 text-center mt-2 pt-4">Quiz Creator</h1>
       <div className="space-y-8 divide-y divide-gray-200">
         <div className="pt-8">
           <div>
